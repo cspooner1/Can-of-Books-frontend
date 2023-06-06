@@ -6,4 +6,4 @@ function About() {
     return <p>Profile page coming soon</p>
   };
 
-export default Profile;
+export default About;
