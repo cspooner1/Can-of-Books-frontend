@@ -8,6 +8,8 @@ import ReactDOM from "react-dom/client";
 import BookFormModal from './BookFormModal';
 import { Button } from 'react-bootstrap';
 import BookEditModal from './BookEditModal';
+import useAuth0 from '@auth0/auth0-react';
+
 
 function BestBooks() {
   const [bookData, setBookData] = useState([]);
