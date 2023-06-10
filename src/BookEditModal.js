@@ -5,7 +5,6 @@ function BookEditModal(props) {
     const [title, setTitle] = useState(props.selectedBook.title);
     const [description, setDescription] = useState(props.selectedBook.description);
     const [status, setStatus] = useState(props.selectedBook.status);
-    const [showModal, setShowModal] = useState(true);
     const handleClose = () => props.setSelectedBook(undefined);
 
     async function onSubmit() {
