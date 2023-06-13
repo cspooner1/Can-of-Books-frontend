@@ -1,11 +1,14 @@
 import {Modal, Button, Form,} from 'react-bootstrap';
 import { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
+import { useAuth0 } from '@auth0/auth0-react';
+
 function BookFormModal(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("");
     const handleClose = () => props.setShowModal(false);
+    const { getAccessTokenSilently } = useAuth0();
 
     async function onSubmit(){
         let book = {
@@ -13,7 +16,11 @@ function BookFormModal(props) {
             description: description,
             status: status
         }
-        let response = await axios.post("https://can-of-books-api-ib2y.onrender.com/books", book)
+        let token = await getAccessTokenSilently();
+        let headers = {
+            Authorization: `Bearer ${token}`
+          }
+        let response = await axios.post("https://can-of-books-api-ib2y.onrender.com/books", book, {headers: headers})
             .catch((e) => { console.log("Caught an error trying to create a book") });
             handleClose();
     }

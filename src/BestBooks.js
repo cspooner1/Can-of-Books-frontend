@@ -8,15 +8,14 @@ import ReactDOM from "react-dom/client";
 import BookFormModal from './BookFormModal';
 import { Button } from 'react-bootstrap';
 import BookEditModal from './BookEditModal';
-import useAuth0 from '@auth0/auth0-react';
-
+import {useAuth0} from '@auth0/auth0-react';
 
 function BestBooks() {
   const [bookData, setBookData] = useState([]);
   const [showModal, setShowModal] = useState(false)
   const [selectedBook, setSelectedBook] = useState(undefined)
   const [index, setIndex] = useState(0);
-
+  const { getAccessTokenSilently } = useAuth0();
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
@@ -30,7 +29,7 @@ function BestBooks() {
           className='w-100'
           src="https://placehold.co/600x400/000000/FFFFFF.png"
           alt="First slide"
-          onClick={() => {setSelectedBook(element)}}
+          onClick={() => { setSelectedBook(element) }}
         />
         <Carousel.Caption>{element.title}</Carousel.Caption>
       </ Carousel.Item>
@@ -39,12 +38,23 @@ function BestBooks() {
   })
 
   useEffect(() => {
-    let bookResponse = axios.get(`https://can-of-books-api-ib2y.onrender.com/books`);
-    bookResponse.then(function (res) {
-      console.log(res.data);
-      setBookData(res.data);
-    })
-  }, [])
+    async function callApi() {
+        let token = await getAccessTokenSilently();
+        let headers = {
+          Authorization: `Bearer ${token}`
+        }
+        let bookResponse = axios.get(`https://can-of-books-api-ib2y.onrender.com/books`, {headers: headers});
+        bookResponse.then(function (res) {
+          console.log(res.data);
+          setBookData(res.data);
+        })
+    }
+    callApi()
+    
+
+  }, []
+  )
+
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
 
