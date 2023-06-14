@@ -44,4 +44,4 @@ function BookEditModal(props) {
     </Modal>
 }
 
-export default BookEditModal
+export default BookEditModal;

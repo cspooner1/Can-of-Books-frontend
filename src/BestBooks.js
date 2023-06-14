@@ -43,8 +43,8 @@ function BestBooks() {
         let headers = {
           Authorization: `Bearer ${token}`
         }
-        let bookResponse = axios.get(`https://can-of-books-api-ib2y.onrender.com/books`, {headers: headers});
-        bookResponse.then(function (res) {
+        let bookResponse = await axios.get(`https://can-of-books-api-ib2y.onrender.com/books`, {headers: headers})
+        .then(function (res) {
           console.log(res.data);
           setBookData(res.data);
         })

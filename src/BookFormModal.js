@@ -17,10 +17,11 @@ function BookFormModal(props) {
             status: status
         }
         let token = await getAccessTokenSilently();
-        let headers = {
+        let header = {
             Authorization: `Bearer ${token}`
           }
-        let response = await axios.post("https://can-of-books-api-ib2y.onrender.com/books", book, {headers: headers})
+        console.log(header);
+        let response = await axios.post("https://can-of-books-api-ib2y.onrender.com/books", book, {headers: header})
             .catch((e) => { console.log("Caught an error trying to create a book") });
             handleClose();
     }

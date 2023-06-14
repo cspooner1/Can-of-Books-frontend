@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Auth0Provider
-      domain='can-of-books.us.auth0.com'
+      domain='https://can-of-books.us.auth0.com'
       clientId='NwiF8iILhWy0WkUD86HXCShXLMjWVIcX'
       redirectUri={window.location.origin}
       audience='https://can-of-books.us.auth0.com/api/v2/'
